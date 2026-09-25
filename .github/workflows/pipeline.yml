@@ -1,4 +1,4 @@
-name: My First Pipeline
+name: Python CI-CD Pipeline
 
 on:
   push:
@@ -26,3 +26,15 @@ jobs:
 
       - name: Run application
         run: python app.py
+
+      - name: Build application
+        run: |
+          mkdir build
+          cp app.py build/
+          cp requirements.txt build/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app
+          path: build/
